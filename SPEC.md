@@ -33,11 +33,11 @@ The protocol is **agent-agnostic** — it works with any LLM agent that can read
 
 | Rule | Value |
 |---|---|
-| Maximum single-bucket size | 18,000 tokens (~32,000 characters for mixed Chinese/English) |
-| Soft ceiling (offset fallback) | 25,000 tokens |
-| Hard ceiling (must split) | 30,000 tokens |
+| Recommended single-bucket size | <18,000 tokens (~32,000 chars for mixed Chinese/English) |
+| Acceptable with offset reads | 18,000–25,000 tokens |
+| Must split | >25,000 tokens |
 
-**Rationale**: LLM `Read` tools typically have a ~20K token soft limit per call. Staying under 18K guarantees atomic reading. Buckets between 18K-25K may need offset-based chunked reads — acceptable but adds friction.
+**Rationale**: LLM `Read` tools typically have a ~20K token soft limit per call. Staying under 18K guarantees atomic reading. 18K-25K is acceptable — the agent reads the file, gets a truncation warning, and completes with an offset read. Over 25K becomes unwieldy and should be split. In production, buckets at 20-22K tokens with offset reads have been proven reliable.
 
 ### 3.2 Split Point Rules
 

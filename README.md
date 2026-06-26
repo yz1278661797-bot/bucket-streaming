@@ -172,7 +172,7 @@ See [example-data-analysis/](example-data-analysis/) for a minimal working examp
 
 ## Who Uses This?
 
-Bucket Streaming was proven in production on a 30-step marketing campaign generation skill spanning 7 buckets. The original skill ran ~127K tokens per full pipeline; after migrating to bucket streaming, jump-backs dropped to zero cost and the agent's attention window stayed clean across all 30 steps.
+Bucket Streaming was proven in production on a 30-step marketing campaign generation skill spanning 7 buckets. The original skill ran ~127K tokens per full linear pipeline; after migrating to bucket streaming, within-bucket jump-backs dropped to zero cost, and the agent's attention window stayed clean across all 30 steps. (Single-run token costs were roughly equivalent — the real savings come from jump-backs and attention hygiene.)
 
 ---
 
