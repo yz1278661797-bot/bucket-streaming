@@ -1,0 +1,27 @@
+# Flow Definition — Data Analysis Pipeline
+
+flow:
+  steps:
+    - id: search
+      description: "Collect data from sources, run queries"
+      handoff: "→ summarize"
+      can_jump_to: []
+
+    - id: summarize
+      description: "Aggregate findings, extract insights"
+      handoff: "→ chart"
+      can_jump_to: ["search"]
+
+    - id: chart
+      description: "Select visualization, generate chart"
+      handoff: "→ export"
+      can_jump_to: ["search", "summarize"]
+
+    - id: export
+      description: "Format output, deliver to user"
+      handoff: "[end]"
+      can_jump_to: ["search", "summarize", "chart"]
+
+jump_rules:
+  max_jumps_per_anchor: 2
+  preserve: "Output of steps before jump target is preserved"

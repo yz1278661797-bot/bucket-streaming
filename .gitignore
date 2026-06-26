@@ -1,0 +1,6 @@
+# Bucket Streaming artifacts
+buckets/
+!example-data-analysis/buckets/
+*.pyc
+__pycache__/
+.DS_Store
