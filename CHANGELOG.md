@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1] - 2026-06-27
+
+### Added
+- `--merge` mode in `bucket-splitter.py` (interactive + `--force` auto-merge)
+- `CONTRIBUTING.md`
+
+### Changed
+- `bucket-splitter.py` now writes self-check headers on merge
+
 ## [1.0] - 2026-06-27
 
 ### Added
