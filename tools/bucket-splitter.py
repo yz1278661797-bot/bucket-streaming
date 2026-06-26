@@ -177,7 +177,7 @@ def main():
         print("Create bucket files manually following the suggestions above.")
         print("=" * 60)
 
-    print(f"\nFull protocol: https://github.com/xxx/bucket-streaming/blob/main/SPEC.md")
+    print(f"\nFull protocol: https://github.com/yz1278661797-bot/bucket-streaming/blob/main/SPEC.md")
 
 
 if __name__ == '__main__':
