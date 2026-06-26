@@ -96,49 +96,67 @@ Santa Monica Studio's 2018 *God of War* runs on a bucket-streaming engine. The P
 
 ## Quick Start
 
-### 1. Analyze your skill
+> Requires Python 3.8+. No external dependencies.
+
+### 1. Try the demo
 
 ```bash
-python tools/bucket-splitter.py /path/to/your/skill
-```
+git clone https://github.com/yz1278661797-bot/bucket-streaming.git
+cd bucket-streaming
 
-> Requires Python 3.8+. No external dependencies.
+# Analyze the example skill
+python tools/bucket-splitter.py example-data-analysis
+```
 
 Output:
 ```
-modules/module_1.md ..... 12,340 chars  ~6,855 tokens
-modules/module_2.md ..... 48,200 chars  ~26,777 tokens ⚠️ >20K
-modules/module_3.md ..... 8,100 chars   ~4,500 tokens
-templates/output.md ..... 11,200 chars  ~6,222 tokens
-judges/reviewer_a.md .... 420 chars     ~233 tokens
+Found 2 source files.
 
---- Suggested split ---
-Bucket B:  modules/module_2.md  →  SPLIT at line 820 (~15K tokens each)
-  → bucket-B1.md  (~13,000 tokens)
-  → bucket-B2.md  (~13,800 tokens)
+  SKILL.md                                          1856 chars  ~  1031 tokens
+  config/flow.yaml                                   711 chars  ~   395 tokens
 
---- Suggested buckets ---
-Bucket A:  module_1.md                                ~6,855 tokens
-Bucket B1: module_2.md [lines 1-820]                  ~13,000 tokens
-Bucket B2: module_2.md [lines 821-end]                ~13,800 tokens
-Bucket C:  module_3.md + output.md + reviewer_a.md    ~11,000 tokens
+  TOTAL                                             1426 tokens
 ```
 
-### 2. Create bucket files
-
-Manually merge source files or use the splitter:
+### 2. Auto-merge into buckets
 
 ```bash
-python tools/bucket-splitter.py /path/to/your/skill --merge
+python tools/bucket-splitter.py example-data-analysis --merge --force
 ```
 
-### 3. Add the scheduler to your SKILL.md
+Output:
+```
+Writing 1 buckets to example-data-analysis/buckets/ ...
 
-Copy the bucket scheduling state machine, state tag spec, and jump-back matrix from `TEMPLATE.md` into your skill's main entry file.
+  bucket-A.md                        2784 chars  ~  1546 tokens
 
-### 4. Run
+Done. 1 bucket files written.
+Next: copy the scheduler from TEMPLATE.md into your SKILL.md
+```
 
-Your agent will now prefetch the next bucket before each user turn, and soft-evict completed buckets.
+### 3. On your own skill
+
+```bash
+# Analyze
+python tools/bucket-splitter.py /path/to/your/skill
+
+# Files over 18K tokens will show split suggestions automatically.
+# Files over 25K tokens are flagged for mandatory split.
+
+# Merge (interactive — you define bucket groupings)
+python tools/bucket-splitter.py /path/to/your/skill --merge
+
+# Merge (auto — splitter groups files by size and order)
+python tools/bucket-splitter.py /path/to/your/skill --merge --force
+```
+
+### 4. Add the scheduler
+
+Copy the **Bucket Scheduling State Machine** section from [TEMPLATE.md](TEMPLATE.md) into your skill's main entry file. Replace the placeholder bucket IDs, step names, and file paths with your own.
+
+### 5. Run
+
+Your agent now prefetches the next bucket before each user turn, soft-evicts completed buckets, and supports zero-cost jump-backs within cached buckets.
 
 ---
 
