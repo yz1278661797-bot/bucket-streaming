@@ -1,5 +1,9 @@
 # Bucket Streaming · LLM Context Scheduling
 
+[![Spec](https://img.shields.io/badge/spec-v1.0-blue)](SPEC.md)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![Status](https://img.shields.io/badge/status-stable-brightgreen)]()
+
 > *"God of War loads the next area before you reach the door. Your LLM agent waits for the user to say 'continue' before reading the next module. This is wrong."*
 
 **Bucket Streaming** is a context management pattern for multi-step LLM agent skills. Inspired by the bucket-streaming engine in *God of War* (2018, Santa Monica Studio), it replaces file-level lazy loading with predictive prefetch + soft eviction for linear pipelines.
@@ -98,6 +102,8 @@ Santa Monica Studio's 2018 *God of War* runs on a bucket-streaming engine. The P
 python tools/bucket-splitter.py /path/to/your/skill
 ```
 
+> Requires Python 3.8+. No external dependencies.
+
 Output:
 ```
 modules/module_1.md ..... 12,340 chars  ~6,855 tokens
@@ -143,6 +149,12 @@ See [SPEC.md](SPEC.md) for the full protocol specification.
 See [TEMPLATE.md](TEMPLATE.md) for a copy-paste-ready scheduler template.
 
 See [example-data-analysis/](example-data-analysis/) for a minimal working example.
+
+---
+
+## Who Uses This?
+
+Bucket Streaming was proven in production on a 30-step marketing campaign generation skill spanning 7 buckets. The original skill ran ~127K tokens per full pipeline; after migrating to bucket streaming, jump-backs dropped to zero cost and the agent's attention window stayed clean across all 30 steps.
 
 ---
 

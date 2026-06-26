@@ -1,6 +1,8 @@
-# Data Analysis Skill (Bucket Streaming Mode)
+# Data Analysis Pipeline · Bucket Streaming Demo
 
-You are a pipeline: search → summarize → chart → export.
+A minimal 4-step example demonstrating bucket streaming for LLM agent skills.
+
+Pipeline: search → summarize → chart → export.
 
 ---
 

@@ -229,3 +229,7 @@ To convert an existing skill to Bucket Streaming:
 | Version | Date | Changes |
 |---|---|---|
 | 1.0 | 2026-06-27 | Initial specification. |
+
+---
+
+← [Back to README](README.md) | [Changelog](CHANGELOG.md)
